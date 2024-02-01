@@ -1,0 +1,9 @@
+SSN: 356779088
+First Name: wes
+Last Name: mackinley
+Middle Initial: o
+Address: 23 desmond street
+City: Akron
+State Code: OH
+Zip Code: 44231
+
