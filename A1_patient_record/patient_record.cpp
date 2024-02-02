@@ -1,3 +1,12 @@
+/*
+Names: Samuel Ndubuisi and Nivyan Chilumula-Jala 
+
+Date: 2/1/2024
+
+Description: This code provides basic validation for each 
+field and writes the patient records to a file
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -103,15 +112,9 @@ Patient getPatientData() {
 void writeToFile(const Patient& patient, const string& filename) {
     ofstream outFile(filename, ios::app);
     if (outFile.is_open()) {
-        outFile << "SSN: " << patient.ssn << endl;
-        outFile << "First Name: " << patient.firstName << endl;
-        outFile << "Last Name: " << patient.lastName << endl;
-        outFile << "Middle Initial: " << patient.middleInitial << endl;
-        outFile << "Address: " << patient.address << endl;
-        outFile << "City: " << patient.city << endl;
-        outFile << "State Code: " << patient.stateCode << endl;
-        outFile << "Zip Code: " << patient.zip << endl;
-        outFile << endl; // Add a blank line for readability
+        outFile << patient.ssn << ", " << patient.firstName << ", " << patient.lastName << ", " 
+                << patient.middleInitial << ", " << patient.address << ", " << patient.city << ", " 
+                << patient.stateCode << ", " << patient.zip << '\n';
         outFile.close();
         cout << "Record written to file successfully.\n";
     } else {

@@ -1,2 +1,2 @@
 # C-CISS456
-Projects from CISS456 course
+Colaboration between Samuel Ndubuisi and Nivyan Chilumula-Jala on Projects from CISS456 course
