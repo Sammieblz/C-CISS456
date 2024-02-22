@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/samue/git/C-CISS456/A1_classes",
-      "program": "c:/Users/samue/git/C-CISS456/A1_classes/build/Debug/outDebug",
+      "cwd": "c:/Users/samue/git/C-CISS456/A1_functions",
+      "program": "c:/Users/samue/git/C-CISS456/A1_functions/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
