@@ -5,14 +5,15 @@
 #include <vector>
 #include <unordered_set>
 #include <algorithm>
+#include <xlocmes>
 
 using namespace std;
 
-enum class State {
+/*enum class State {
     AL, AK, AZ, AR, CA, CO, CT, DE, DC, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME,
     MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI,
     SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY
-};
+};*/
 
 class Patient {
 private:
@@ -22,12 +23,12 @@ private:
     char middleInitial;
     string address;
     string city;
-    char state[2]; // State input as char[2]
+    string state; // State input as char[2]
     string zip;
 
 public:
     void inputData() {
-        cout << "Enter SSN (9 digits): ";
+        /*cout << "Enter SSN (9 digits): ";
         cin >> ssn;
 
         cout << "Enter first name: ";
@@ -44,50 +45,53 @@ public:
         getline(cin, address);
 
         cout << "Enter city: ";
-        cin >> city;
+        cin >> city;*/
 
         cout << "Enter state code (2 characters): ";
         cin >> state;
+
+        while (isValidState(state) == false)
+        {
+            cout << "ERROR: Invalid State" << '\n';
+            cout << "Enter state code (2 characters): ";
+            cin >> state;
+            isValidState(state);
+        }
 
         cout << "Enter ZIP code: ";
         cin >> zip;
     }
 
-    bool isValidState() {
-        unordered_set<string> validStateCodes = readValidStateCodesFromFile("states.csv");
-        string stateStr(state + 2); // Convert char[2] to string
-        return validStateCodes.find(stateStr) != validStateCodes.end();
-    }
+    bool isValidState(string state) {
+        
+        // Step 1: open .csv file
+        ifstream stateFile("states.csv");
 
-private:
-    unordered_set<string> readValidStateCodesFromFile(const string& filename) {
-        unordered_set<string> validStateCodes;
-        ifstream file(filename);
-        if (file.is_open()) {
-            string line;
-            while (getline(file, line)) {
-                stringstream ss(line);
-                string stateCode;
-                getline(ss, stateCode, ','); // Assuming state code is the first column
-                validStateCodes.insert(stateCode);
-            }
-            file.close();
-        } else {
-            cout << "Unable to open file: " << filename << endl;
+        // Step 2: validate if .csv file is open
+        if(!stateFile.is_open()) std:cout << "ERROR: File Not Open";
+
+        // Step 3: Validate data
+        string stateCSV;
+
+        while (stateFile.good())
+        {
+            while (getline(stateFile, stateCSV, '\n')) 
+            {
+                if (state.compare(stateCSV) == 0)
+                {
+                    stateFile.close();
+                    return true;
+                } 
+            }         
         }
-        return validStateCodes;
+        stateFile.close();
+        return false;        
     }
 };
 
 int main() {
     Patient patient;
     patient.inputData();
-
-    if (patient.isValidState()) {
-        cout << "State is valid." << endl;
-    } else {
-        cout << "State is not valid." << endl;
-    }
 
     return 0;
 }
