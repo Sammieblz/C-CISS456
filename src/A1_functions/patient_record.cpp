@@ -48,9 +48,31 @@ bool validateCity(const string& city) {
 }
 
 // Function to validate state code (assuming state codes are 2 characters)
-bool validateStateCode(const string& stateCode) {
-    return stateCode.length() == 2 && isalpha(stateCode[0]) && isalpha(stateCode[1]);
-}
+    bool isValidState(string state) {
+        
+        // Step 1: open .csv file
+        ifstream stateFile("states.csv");
+
+        // Step 2: validate if .csv file is open
+        if(!stateFile.is_open()) std:cout << "ERROR: File Not Open";
+
+        // Step 3: Validate data
+        string stateCSV;
+
+        while (stateFile.good())
+        {
+            while (getline(stateFile, stateCSV, '\n')) 
+            {
+                if (state.compare(stateCSV) == 0)
+                {
+                    stateFile.close();
+                    return true;
+                } 
+            }         
+        }
+        stateFile.close();
+        return false;        
+    }
 
 // Function to validate ZIP (digits only)
 bool validateZIP(const string& zip) {
@@ -94,10 +116,18 @@ Patient getPatientData() {
         cin >> patient.city;
     }
     cout << "Enter state code (2 characters): ";
-    cin >> patient.stateCode;
-    while (!validateStateCode(patient.stateCode)) {
-        cout << "Invalid state code. Please enter again: ";
-        cin >> patient.stateCode;
+        cin >> state;
+
+        while (isValidState(state) == false)
+        {
+            cout << "ERROR: Invalid State" << '\n';
+            cout << "Enter state code (2 characters): ";
+            cin >> state;
+            isValidState(state);
+        }
+
+        cout << "Enter ZIP code: ";
+        cin >> zip;
     }
     cout << "Enter ZIP code: ";
     cin >> patient.zip;
