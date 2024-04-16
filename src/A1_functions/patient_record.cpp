@@ -136,7 +136,7 @@ Patient getPatientData() {
         cin >> patient.zip;
     }
     return patient;
-}
+};
 
 // Function to write patient record to file
 void writeToFile(const Patient& patient, const string& filename) {
