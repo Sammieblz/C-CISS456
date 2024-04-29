@@ -5,8 +5,14 @@
 #include <vector>
 #include <unordered_set>
 #include <algorithm>
+#include <regex>
 
 using namespace std;
+
+const std::regex SSN_REGEX("\\d{9}");
+const std::regex NAME_REGEX("[a-zA-Z]+");
+const std::regex ADDRESS_REGEX("[a-zA-Z0-9 ]+");
+const std::regex ZIP_REGEX("\\d{5}");
 
 class Patient {
 private:
@@ -26,10 +32,11 @@ public:
 
     // Function to input patient data
     void inputData() {
+        std::smatch match;
         cout << "Enter SSN (9 digits): ";
         cin >> ssn;
         // Validate SSN format
-        while (ssn.length() != 9 || ssn.find_first_not_of("0123456789") != string::npos) {
+        while (!std::regex_match(ssn, SSN_REGEX)) {
             cout << "Invalid SSN. Please enter again: ";
             cin >> ssn;
         }
@@ -37,7 +44,7 @@ public:
         cout << "Enter first name: ";
         cin >> firstName;
         // Validate first name format
-        while (firstName.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != string::npos) {
+        while (!std::regex_match(firstName, NAME_REGEX)) {
             cout << "Invalid name. Please enter again: ";
             cin >> firstName;
         }
@@ -45,7 +52,7 @@ public:
         cout << "Enter last name: ";
         cin >> lastName;
         // Validate last name format
-        while (lastName.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != string::npos) {
+        while (!std::regex_match(lastName, NAME_REGEX)) {
             cout << "Invalid name. Please enter again: ";
             cin >> lastName;
         }
@@ -57,7 +64,7 @@ public:
         cout << "Enter address: ";
         getline(cin, address);
         // Validate address format
-        while (address.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ") != string::npos) {
+        while (!std::regex_match(address, ADDRESS_REGEX)) {
             cout << "Invalid address. Please enter again: ";
             getline(cin, address);
         }
@@ -65,7 +72,7 @@ public:
         cout << "Enter city: ";
         cin >> city;
         // Validate city format
-        while (city.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != string::npos) {
+        while (!std::regex_match(city, NAME_REGEX)) {
             cout << "Invalid city. Please enter again: ";
             cin >> city;
         }
@@ -84,7 +91,7 @@ public:
         cout << "Enter ZIP code: ";
         cin >> zip;
         // Validate ZIP code format
-        while (zip.length() != 5 || zip.find_first_not_of("0123456789") != string::npos) {
+        while (!std::regex_match(zip, ZIP_REGEX)) {
             cout << "Invalid ZIP code. Please enter again: ";
             cin >> zip;
         }
