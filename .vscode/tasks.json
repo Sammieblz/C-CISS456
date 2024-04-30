@@ -9,8 +9,7 @@
           "-g",
           "${file}",
           "-o",
-          "${fileDirname}\\${fileBasenameNoExtension}.exe",
-          "sqlite3"
+          "${fileDirname}\\${fileBasenameNoExtension}.exe"
         ],
         "options": {
           "cwd": "${fileDirname}"
